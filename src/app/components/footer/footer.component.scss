@@ -1,0 +1,27 @@
+/* footer.component.css */
+p-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000; /* Adjust the z-index as needed */
+  // background-color: var(--orange-400);
+  border-radius: 1rem;
+  background-image: linear-gradient(
+    to right,
+    var(--bluegray-500),
+    var(--bluegray-800)
+  );
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  bottom: 0;
+  color: var(--orange-400);
+}
+
+.right-section a {
+  margin-left: 1rem;
+  color: #007bff; /* Customize the link color */
+}

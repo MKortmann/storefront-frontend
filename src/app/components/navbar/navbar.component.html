@@ -1,0 +1,81 @@
+<p-toolbar
+  styleClass="bg-gray-900 shadow-2"
+  [style]="{
+    'border-radius': '1rem',
+    'background-image':
+      'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))'
+  }"
+>
+  <ng-template pTemplate="start">
+    <!-- <p-image src="assets/icons/mk.svg"></p-image> -->
+    <p-avatar
+      label="SF"
+      styleClass="mr-2"
+      size="xlarge"
+      shape="circle"
+      [style]="{ 'background-color': '#ffffff', color: 'var(--orange-400)' }"
+    ></p-avatar>
+    <span
+      class="font-bold"
+      style="
+        color: var(--orange-400);
+        margin-left: 5px;
+        font-size: 1.5rem;
+        max-width: 100px;
+      "
+      >Store Frontend</span
+    >
+  </ng-template>
+  <ng-template pTemplate="center">
+    <div class="flex flex-wrap align-items-center gap-3">
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+      >
+        <i
+          class="pi pi-caret-left"
+          style="font-size: 2rem; margin-right: 80px"
+        ></i>
+      </button>
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+      >
+        <i
+          class="pi pi-home"
+          style="font-size: 2rem; margin-right: 20px; color: var(--orange-400)"
+        ></i>
+      </button>
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+      >
+        <i
+          class="pi pi-search"
+          style="font-size: 2rem; margin-right: 20px; color: var(--orange-400)"
+        ></i>
+      </button>
+
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+      >
+        <i
+          class="pi pi-shopping-cart"
+          style="font-size: 2rem; margin-right: 80px; color: var(--orange-400)"
+        ></i>
+      </button>
+      <button
+        class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+      >
+        <i class="pi pi-caret-right" style="font-size: 2rem"></i>
+      </button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="flex align-items-center gap-2">
+      <p-avatar
+        image="assets/avatars/mtsamis.svg"
+        shape="circle"
+        size="large"
+      />
+      <span class="font-bold" style="color: var(--orange-400)">John Doe</span>
+    </div>
+  </ng-template>
+</p-toolbar>

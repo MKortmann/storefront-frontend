@@ -2,11 +2,21 @@ import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterOutlet } from '@angular/router'
 import { ButtonModule } from 'primeng/button'
+import { MainComponent } from './pages/main/main.component'
+import { NavbarComponent } from './components/navbar/navbar.component'
+import { FooterComponent } from './components/footer/footer.component'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ButtonModule],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    ButtonModule,
+    MainComponent,
+    NavbarComponent,
+    FooterComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
