@@ -1,0 +1,15 @@
+* {
+  margin-top: 20px;
+}
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+
+/* Individual card styles (optional) */
+.p-card {
+  margin: 20px; /* Adjust as needed for spacing between cards */
+}
