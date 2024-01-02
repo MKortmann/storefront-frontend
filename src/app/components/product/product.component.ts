@@ -4,8 +4,11 @@ import { CardModule } from 'primeng/card'
 import { ButtonModule } from 'primeng/button'
 import { Input } from '@angular/core'
 import { DropdownModule } from 'primeng/dropdown'
-
 import { FormsModule } from '@angular/forms'
+import { Store } from '@ngrx/store'
+import { selectCartItems } from '../../store/storeBackend.selectors'
+import { addToCart } from '../../store/storeBackend.action'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-product',
@@ -17,10 +20,23 @@ import { FormsModule } from '@angular/forms'
 export class ProductComponent {
   @Input() item: any
 
-  quantities = [{ name: 'City 1' }, { name: 'City 2' }, { name: 'City 3' }]
-  selectedQuantity: { name: string } | undefined
+  shoppingCart$: Observable<any>
+  quantities: number[] = []
 
-  addToCart() {
-    alert(`clicked to add to card: ${JSON.stringify(this.selectedQuantity)}`)
+  constructor(private store: Store) {
+    this.shoppingCart$ = this.store.select(selectCartItems)
+  }
+
+  ngOnInit() {
+    for (let i = 1; i <= 10; i++) {
+      this.quantities.push(i)
+    }
+  }
+
+  selectedQuantity = 0
+
+  addToCart(item: any) {
+    console.log('dispatched the action!')
+    this.store.dispatch(addToCart({ item, quantity: this.selectedQuantity }))
   }
 }

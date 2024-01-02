@@ -1,1 +1,4 @@
-<p>shopping-cart works!</p>
+@for (item of shoppingCart; track item) {
+  <li>item.item.name</li>
+  <li>item.quantity</li>
+}

@@ -23,4 +23,8 @@ export class NavbarComponent {
   goForward(): void {
     this.location.forward()
   }
+
+  navigateTo(route: string): void {
+    this.router.navigate([route])
+  }
 }
