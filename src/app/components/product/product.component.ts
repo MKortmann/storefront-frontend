@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store'
 import { selectCartItems } from '../../store/storeBackend.selectors'
 import { addToCart } from '../../store/storeBackend.action'
 import { Observable } from 'rxjs'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-product',
@@ -19,11 +20,15 @@ import { Observable } from 'rxjs'
 })
 export class ProductComponent {
   @Input() item: any
+  @Input() selectedQuantity: number = 0
 
   shoppingCart$: Observable<any>
   quantities: number[] = []
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+  ) {
     this.shoppingCart$ = this.store.select(selectCartItems)
   }
 
@@ -33,10 +38,13 @@ export class ProductComponent {
     }
   }
 
-  selectedQuantity = 0
-
   addToCart(item: any) {
-    console.log('dispatched the action!')
     this.store.dispatch(addToCart({ item, quantity: this.selectedQuantity }))
+    this.store.select(selectCartItems).subscribe((cart: any) => {
+      localStorage.setItem('shoppingCart', JSON.stringify(cart))
+    })
+  }
+  isSpecificRoute(route: string): boolean {
+    return this.route.snapshot.routeConfig?.path === route
   }
 }

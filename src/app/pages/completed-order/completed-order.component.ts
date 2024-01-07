@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-completed-order',
   standalone: true,
   imports: [],
   templateUrl: './completed-order.component.html',
-  styleUrl: './completed-order.component.scss'
+  styleUrl: './completed-order.component.scss',
 })
-export class CompletedOrderComponent {
-
-}
+export class CompletedOrderComponent {}

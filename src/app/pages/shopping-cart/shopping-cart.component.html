@@ -1,4 +1,7 @@
+<h1>Shopping Cart</h1>
 @for (item of shoppingCart; track item) {
-  <li>item.item.name</li>
-  <li>item.quantity</li>
+  <app-product
+    [item]="item.item"
+    [selectedQuantity]="item.quantity"
+  ></app-product>
 }

@@ -16,10 +16,12 @@
       [showClear]="true"
       placeholder="Select a quantity"
     ></p-dropdown>
-    <p-button
-      label="Add to Cart"
-      icon="pi pi-cart-plus"
-      (click)="addToCart(item)"
-    ></p-button>
+    @if (isSpecificRoute('')) {
+      <p-button
+        label="Add to Cart"
+        icon="pi pi-cart-plus"
+        (click)="addToCart(item)"
+      ></p-button>
+    }
   </ng-template>
 </p-card>
