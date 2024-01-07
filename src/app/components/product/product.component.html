@@ -15,13 +15,26 @@
       [(ngModel)]="selectedQuantity"
       [showClear]="true"
       placeholder="Select a quantity"
+      (onChange)="onQuantityChange(item)"
     ></p-dropdown>
     @if (isSpecificRoute('')) {
       <p-button
         label="Add to Cart"
         icon="pi pi-cart-plus"
+        [outlined]="true"
+        [rounded]="true"
         (click)="addToCart(item)"
       ></p-button>
+      <span style="margin-left: 5px">
+        <p-button
+          label=""
+          [rounded]="true"
+          [outlined]="true"
+          severity="warning"
+          icon="pi pi-cart-plus"
+          (click)="navigateTo('shopping-cart')"
+        ></p-button>
+      </span>
     }
   </ng-template>
 </p-card>

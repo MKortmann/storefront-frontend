@@ -7,9 +7,10 @@ import { DropdownModule } from 'primeng/dropdown'
 import { FormsModule } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { selectCartItems } from '../../store/storeBackend.selectors'
-import { addToCart } from '../../store/storeBackend.action'
+import { addToCart, deleteFromCart } from '../../store/storeBackend.action'
 import { Observable } from 'rxjs'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Item } from '../../store/storeBackend.reducer'
 
 @Component({
   selector: 'app-product',
@@ -27,7 +28,8 @@ export class ProductComponent {
 
   constructor(
     private store: Store,
-    private route: ActivatedRoute,
+    private activedRoute: ActivatedRoute,
+    private router: Router,
   ) {
     this.shoppingCart$ = this.store.select(selectCartItems)
   }
@@ -44,7 +46,21 @@ export class ProductComponent {
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
     })
   }
+
+  onQuantityChange(item: Item) {
+    if (!this.selectedQuantity) {
+      const id = item.id
+
+      this.store.dispatch(deleteFromCart({ itemId: id }))
+      this.store.select(selectCartItems).subscribe((cart: any) => {
+        localStorage.setItem('shoppingCart', JSON.stringify(cart))
+      })
+    }
+  }
   isSpecificRoute(route: string): boolean {
-    return this.route.snapshot.routeConfig?.path === route
+    return this.activedRoute.snapshot.routeConfig?.path === route
+  }
+  navigateTo(route: string): void {
+    this.router.navigate([route])
   }
 }
