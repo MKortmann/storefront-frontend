@@ -42,21 +42,21 @@ export class ProductComponent {
 
   addToCart(item: any) {
     this.store.dispatch(addToCart({ item, quantity: this.selectedQuantity }))
+    this.updateLocalStorage()
+  }
+
+  onQuantityChange(item: Item) {
+    if (!this.selectedQuantity) {
+      this.store.dispatch(deleteFromCart({ itemId: item.id }))
+      this.updateLocalStorage()
+    }
+  }
+  private updateLocalStorage() {
     this.store.select(selectCartItems).subscribe((cart: any) => {
       localStorage.setItem('shoppingCart', JSON.stringify(cart))
     })
   }
 
-  onQuantityChange(item: Item) {
-    if (!this.selectedQuantity) {
-      const id = item.id
-
-      this.store.dispatch(deleteFromCart({ itemId: id }))
-      this.store.select(selectCartItems).subscribe((cart: any) => {
-        localStorage.setItem('shoppingCart', JSON.stringify(cart))
-      })
-    }
-  }
   isSpecificRoute(route: string): boolean {
     return this.activedRoute.snapshot.routeConfig?.path === route
   }
