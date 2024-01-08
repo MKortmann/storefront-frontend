@@ -28,10 +28,23 @@ export const initialCartState: CartState = {
 export const storeBackendReducer = createReducer(
   initialCartState,
   on(addToCart, (state, { item, quantity }) => {
+    const isItemAlreadyInTheCart = state.items.find(
+      (cartItem) => cartItem.item.id === item.id,
+    )
+
+    if (isItemAlreadyInTheCart) {
+      const updatedItems = state.items.map((cartItem) =>
+        cartItem.item.id === item.id
+          ? { ...cartItem, quantity: cartItem.quantity + quantity }
+          : cartItem,
+      )
+
+      return { ...state, items: updatedItems }
+    }
+
     return { ...state, items: [...state.items, { item, quantity }] }
   }),
   on(deleteFromCart, (state, { itemId }) => {
-    debugger
     const updatedItems = state.items.filter(
       (cartItem) => cartItem.item.id !== itemId,
     )
