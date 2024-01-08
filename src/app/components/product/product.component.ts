@@ -21,7 +21,7 @@ import { Item } from '../../store/storeBackend.reducer'
 })
 export class ProductComponent {
   @Input() item: any
-  @Input() selectedQuantity: number = 0
+  @Input() selectedQuantity: number = 1
 
   shoppingCart$: Observable<any>
   quantities: number[] = []
@@ -32,6 +32,7 @@ export class ProductComponent {
     private router: Router,
   ) {
     this.shoppingCart$ = this.store.select(selectCartItems)
+    // this.selectedQuantity = this.item.quantity ?? 0
   }
 
   ngOnInit() {
@@ -51,16 +52,18 @@ export class ProductComponent {
       this.updateLocalStorage()
     }
   }
-  private updateLocalStorage() {
-    this.store.select(selectCartItems).subscribe((cart: any) => {
-      localStorage.setItem('shoppingCart', JSON.stringify(cart))
-    })
-  }
 
   isSpecificRoute(route: string): boolean {
     return this.activedRoute.snapshot.routeConfig?.path === route
   }
+
   navigateTo(route: string): void {
     this.router.navigate([route])
+  }
+
+  private updateLocalStorage() {
+    this.store.select(selectCartItems).subscribe((cart: any) => {
+      localStorage.setItem('shoppingCart', JSON.stringify(cart))
+    })
   }
 }

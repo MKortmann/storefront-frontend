@@ -13,7 +13,7 @@
     <p-dropdown
       [options]="quantities"
       [(ngModel)]="selectedQuantity"
-      [showClear]="true"
+      [showClear]="!isSpecificRoute('')"
       placeholder="Select a quantity"
       (onChange)="onQuantityChange(item)"
     ></p-dropdown>
