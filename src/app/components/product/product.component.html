@@ -1,23 +1,31 @@
-<p-card
-  header="{{ item.name }}"
-  subheader="{{ item.price }}"
-  [style]="{ width: '300px' }"
->
-  <ng-template pTemplate="header">
-    <img alt="Card" src="{{ item.url }}" />
+<p-card header="{{ item.name }}" subheader="" [style]="{ width: '300px' }">
+  <ng-template pTemplate="header" p-Tooltip="click for details">
+    <img
+      alt="Card"
+      class="hover-pointer"
+      src="{{ item.url }}"
+      (click)="navigateTo('product-details/' + item.id)"
+    />
   </ng-template>
-  <p>
-    {{ item.description }}
-  </p>
+  @if (isSpecificRoute('product-details/:id')) {
+    <p>
+      {{ item.description }}
+    </p>
+  }
+  <ng-template pTemplate="subheader">
+    <div style="font-weight: bold">
+      {{ item.price | currency: 'USD' }}
+    </div>
+  </ng-template>
   <ng-template pTemplate="footer">
     <p-dropdown
       [options]="quantities"
       [(ngModel)]="selectedQuantity"
-      [showClear]="!isSpecificRoute('')"
+      [showClear]="isSpecificRoute('shopping-cart')"
       placeholder="Select a quantity"
       (onChange)="onQuantityChange(item)"
     ></p-dropdown>
-    @if (isSpecificRoute('')) {
+    @if (!isSpecificRoute('shopping-cart')) {
       <p-button
         label="Add to Cart"
         icon="pi pi-cart-plus"
@@ -35,6 +43,15 @@
           (click)="navigateTo('shopping-cart')"
         ></p-button>
       </span>
+    }
+    @if (isSpecificRoute('product-details/:id')) {
+      <p-button
+        label="Product List"
+        icon=""
+        [outlined]="true"
+        [rounded]="true"
+        (click)="navigateTo('')"
+      ></p-button>
     }
   </ng-template>
 </p-card>

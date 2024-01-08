@@ -11,11 +11,20 @@ import { addToCart, deleteFromCart } from '../../store/storeBackend.action'
 import { Observable } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Item } from '../../store/storeBackend.reducer'
+import { CommonModule } from '@angular/common'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CardModule, ButtonModule, DropdownModule, FormsModule],
+  imports: [
+    CardModule,
+    ButtonModule,
+    DropdownModule,
+    FormsModule,
+    CommonModule,
+    TooltipModule,
+  ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
@@ -32,7 +41,6 @@ export class ProductComponent {
     private router: Router,
   ) {
     this.shoppingCart$ = this.store.select(selectCartItems)
-    // this.selectedQuantity = this.item.quantity ?? 0
   }
 
   ngOnInit() {
@@ -57,7 +65,7 @@ export class ProductComponent {
     return this.activedRoute.snapshot.routeConfig?.path === route
   }
 
-  navigateTo(route: string): void {
+  navigateTo(route: string, item: any = null): void {
     this.router.navigate([route])
   }
 
